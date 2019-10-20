@@ -1,6 +1,7 @@
 " Plugins
 call plug#begin()
 Plug 'ajmwagar/vim-deus'
+Plug 'justinmk/vim-dirvish'
 call plug#end()
 
 colors deus
