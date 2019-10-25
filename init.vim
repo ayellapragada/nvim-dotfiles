@@ -48,6 +48,9 @@ let g:clever_f_across_no_line    = 1
 let g:clever_f_fix_key_direction = 1
 let g:clever_f_timeout_ms        = 3000
 
+" Better display for messages
+set cmdheight=2
+
 " ESCAPE BETTER WOO.
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>
@@ -72,7 +75,6 @@ nnoremap , :
 
 nnoremap <silent> <leader>ff :Rg<CR>
 nnoremap <silent> <Leader>fg :Rg <C-R><C-W><CR>
-
 
 nnoremap <leader>n :nohl<CR>
 nnoremap <C-p> :GFiles<cr>
