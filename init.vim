@@ -5,17 +5,22 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
+Plug 'metakirby5/codi.vim'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
+Plug 'rhysd/clever-f.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
 Plug 'sheerun/vim-polyglot'
@@ -29,44 +34,28 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 
 " Experimental Plugins
-Plug 'jreybert/vimagit'
 Plug 'liuchengxu/vista.vim'
-Plug 'machakann/vim-sandwich'
 Plug 'mattn/emmet-vim'
-Plug 'mbbill/undotree'
-Plug 'rhysd/clever-f.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-projectionist'
 call plug#end()
 
+" General Settings
 set background=dark
 colorscheme gruvbox
-
 set updatetime=300
-
-let g:clever_f_across_no_line    = 1
-let g:clever_f_fix_key_direction = 1
-let g:clever_f_timeout_ms        = 3000
-
 " Better display for messages
 set cmdheight=2
-
 set signcolumn=yes
+" Have relative line numbers, with actual line number of current line.
+set number
+set relativenumber
+"
+" Leader and easier command
+let mapleader = " "
+nnoremap , :
 
-" if you have not copied default recipes
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-
-" add spaces inside bracket
-let g:sandwich#recipes += [
-      \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
-      \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
-      \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
-      \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
-      \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
-      \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
-      \ ]
-
-" ESCAPE BETTER WOO.
+" Better Escape
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>
 
@@ -80,21 +69,36 @@ nnoremap <C-l> <C-w>l
 nmap j gj
 nmap k gk
 
-" Have relative line numbers, with actual line number of current line.
-set number
-set relativenumber
-
-" Leader and easier command
-let mapleader = " "
-nnoremap , :
-
-nnoremap <silent> <leader>ff :Rg<CR>
-nnoremap <silent> <Leader>fg :Rg <C-R><C-W><CR>
-
+"Leader Mappings
+nnoremap <leader>ff :Rg<CR>
+nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
-nnoremap <C-p> :GFiles<cr>
+nnoremap <leader>c :Codi!!<CR>
+nnoremap <leader>m :Magit<CR>
 
+" Plugin Settings
 
+" clever-f
+let g:clever_f_across_no_line    = 1
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_timeout_ms        = 3000
+
+" vim-sandwich
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+" add spaces inside bracket
+let g:sandwich#recipes += [
+      \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
+      \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
+      \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
+      \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
+      \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
+      \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
+      \ ]
+
+" fzf
+nnoremap <C-p> :Files<cr>
+
+" True Colors
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
