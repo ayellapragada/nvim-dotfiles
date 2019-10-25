@@ -1,10 +1,52 @@
 " Plugins
 call plug#begin()
-Plug 'ajmwagar/vim-deus'
+Plug 'alvan/vim-closetag'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'janko-m/vim-test'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'kana/vim-textobj-user'
+Plug 'markonm/traces.vim'
+Plug 'mhinz/vim-signify'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/jsonc.vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'prettier/vim-prettier'
+Plug 'rhysd/git-messenger.vim'
+Plug 'rlue/vim-fold-rspec'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'troydm/zoomwintab.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
+Plug 'wellle/targets.vim'
+
+" Experimental Plugins
+Plug 'jreybert/vimagit'
+Plug 'liuchengxu/vista.vim'
+Plug 'machakann/vim-sandwich'
+Plug 'mattn/emmet-vim'
+Plug 'mbbill/undotree'
+Plug 'rhysd/clever-f.vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-projectionist'
 call plug#end()
 
-colors deus
+set background=dark
+colorscheme gruvbox
+
+set updatetime=300
+
+let g:clever_f_across_no_line    = 1
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_timeout_ms        = 3000
 
 " ESCAPE BETTER WOO.
 inoremap jk <esc>
@@ -27,6 +69,13 @@ set relativenumber
 " Leader and easier command
 let mapleader = " "
 nnoremap , :
+
+nnoremap <silent> <leader>ff :Rg<CR>
+nnoremap <silent> <Leader>fg :Rg <C-R><C-W><CR>
+
+
+nnoremap <leader>n :nohl<CR>
+nnoremap <C-p> :GFiles<cr>
 
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
