@@ -8,9 +8,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
-Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
@@ -23,6 +21,7 @@ Plug 'prettier/vim-prettier'
 Plug 'rhysd/clever-f.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
+Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -32,6 +31,8 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 
 " Experimental Plugins
 Plug 'junegunn/gv.vim'
@@ -120,6 +121,18 @@ function! FloatingFZF()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 nnoremap <C-p> :Files<cr>
+
+" Nerdtree
+map <C-n> :NERDTreeToggle<CR>
+map - :NERDTreeFind<cr>
+" Close nerdtree if last open buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" enable line numbers
+let NERDTreeShowLineNumbers=1 
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+"show hidden files
+let NERDTreeShowHidden=1
 
 " vim wiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
