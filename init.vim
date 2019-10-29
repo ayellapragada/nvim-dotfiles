@@ -9,6 +9,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-user'
+Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
@@ -52,10 +53,6 @@ set signcolumn=yes
 " Have relative line numbers, with actual line number of current line.
 set number
 set relativenumber
-"
-" Leader and easier command
-let mapleader = " "
-nnoremap , :
 
 " Better Escape
 inoremap jk <esc>
@@ -71,12 +68,18 @@ nnoremap <C-l> <C-w>l
 nmap j gj
 nmap k gk
 
+" Leader and easier command
+let mapleader = " "
+nnoremap , :
+
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <leader>c :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
+nmap <leader>vr :sp $MYVIMRC<cr>
+nmap <leader>so :source $MYVIMRC<cr>
 
 " Plugin Settings
 
@@ -99,28 +102,31 @@ let g:sandwich#recipes += [
 
 " fzf
 let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+" function! FloatingFZF()
+"   let buf = nvim_create_buf(v:false, v:true)
+"   call setbufvar(buf, '&signcolumn', 'no')
 
-  let height = float2nr(20)
-  let width = float2nr(160)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = 1
+"   let height = float2nr(20)
+"   let width = float2nr(160)
+"   let horizontal = float2nr((&columns - width) / 2)
+"   let vertical = 1
 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
+"   let opts = {
+"         \ 'relative': 'editor',
+"         \ 'row': vertical,
+"         \ 'col': horizontal,
+"         \ 'width': width,
+"         \ 'height': height,
+"         \ 'style': 'minimal'
+"         \ }
 
-  call nvim_open_win(buf, v:true, opts)
-endfunction
+"   call nvim_open_win(buf, v:true, opts)
+" endfunction
 nnoremap <C-p> :Files<cr>
+
+" HighlightYank
+let g:highlightedyank_highlight_duration = 250
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
