@@ -20,8 +20,15 @@ Use this to make fzf :Files work the way I want it. Don't exclude hidden files, 
 - <C-f> switch from command-line mode to command-line window
 - USE MARKS HOLY m{a-zA-Z} and then `{mark}
 - quickfix list usage
-- sa{motion/textobject}{addition} / sd{deletion} / sr{deletion}{addition}
--
+
 - EASY PLUGINS
-- cr{opt} for abolish
-- g> and g< to swap args
+cr{opt} for abolish
+g> and g< to swap args
+- sa{motion/textobject}{addition} / sd{deletion} / sr{deletion}{addition}
+nnoremap <Leader>tt :Ttoggle<cr>
+vnoremap <Leader>ts :TREPLSendSelection<cr>
+nnoremap <Leader>ts :TREPLSendLine<cr>
+nnoremap <Leader>tn :TestNearest<cr>
+nnoremap <Leader>tf :TestFile<cr>
+nnoremap <Leader>tl :TestLast<cr>
+nnoremap <Leader>tv :TestVisit<cr>
