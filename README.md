@@ -21,3 +21,7 @@ Use this to make fzf :Files work the way I want it. Don't exclude hidden files, 
 - USE MARKS HOLY m{a-zA-Z} and then `{mark}
 - quickfix list usage
 - sa{motion/textobject}{addition} / sd{deletion} / sr{deletion}{addition}
+-
+- EASY PLUGINS
+- cr{opt} for abolish
+- g> and g< to swap args
