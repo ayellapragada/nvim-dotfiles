@@ -64,6 +64,12 @@ set ignorecase
 set smartcase
 set incsearch
 
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
 " Better Escape
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>
@@ -99,8 +105,13 @@ nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
 nmap <leader>vr :vs $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
-vnoremap <Leader>st :TREPLSendSelection<cr>
-nnoremap <Leader>st :TREPLSendLine<cr>
+nnoremap <Leader>tt :Ttoggle<cr>
+vnoremap <Leader>ts :TREPLSendSelection<cr>
+nnoremap <Leader>ts :TREPLSendLine<cr>
+nnoremap <Leader>tn :TestNearest<cr>
+nnoremap <Leader>tf :TestFile<cr>
+nnoremap <Leader>tl :TestLast<cr>
+nnoremap <Leader>tv :TestVisit<cr>
 
 " Plugin Settings
 
@@ -148,7 +159,11 @@ command! -nargs=+ TT Topen | T <args>
 let g:neoterm_autoscroll = '1'
 let g:neoterm_size = 16
 let g:neoterm_repl_ruby = 'pry'
+let g:neoterm_default_mod = 'botright'
 tnoremap <C-q> <C-\><C-n>:q<CR>
+
+" vim-test
+let test#strategy = "neoterm"
 
 " CoC.nvim
 " Remap keys for gotos
