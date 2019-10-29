@@ -9,6 +9,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-user'
+Plug 'kassio/neoterm'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
@@ -34,29 +35,41 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-
 " Experimental Plugins
 Plug 'junegunn/gv.vim'
-Plug 'liuchengxu/vista.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-projectionist'
 call plug#end()
 
 " General Settings
+
+" Theme 
 set background=dark
 colorscheme gruvbox
+
 set updatetime=300
+
 " Better display for messages
 set cmdheight=2
 set signcolumn=yes
+
 " Have relative line numbers, with actual line number of current line.
 set number
 set relativenumber
 
+" Better Search
+set ignorecase
+set smartcase
+set incsearch
+
 " Better Escape
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>
+
+" Fix j and k for visual lines
+nmap j gj
+nmap k gk
 
 " Quicker split navigation
 nnoremap <C-j> <C-w>j
@@ -64,9 +77,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" Fix j and k for visual lines
-nmap j gj
-nmap k gk
+" Correctly locate new splits
+set splitright
+set splitbelow
+
+" Remap Esc for terminal mode
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " Leader and easier command
 let mapleader = " "
@@ -76,10 +94,12 @@ nnoremap , :
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
-nnoremap <leader>c :Codi!!<CR>
+nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
-nmap <leader>vr :sp $MYVIMRC<cr>
+nmap <leader>vr :vs $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
+vnoremap <Leader>st :TREPLSendSelection<cr>
+nnoremap <Leader>st :TREPLSendLine<cr>
 
 " Plugin Settings
 
@@ -121,6 +141,13 @@ let NERDTreeShowHidden=1
 " vim wiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" neoterm
+command! -nargs=+ TT Topen | T <args>
+let g:neoterm_autoscroll = '1'
+let g:neoterm_size = 16
+let g:neoterm_repl_ruby = 'pry'
+tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " CoC.nvim
 " Remap keys for gotos
