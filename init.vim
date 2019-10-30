@@ -111,6 +111,7 @@ nnoremap <Leader>ts :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
+nnoremap <Leader>ta :TestSuite<cr>
 nnoremap <Leader>tv :TestVisit<cr>
 
 " Plugin Settings
