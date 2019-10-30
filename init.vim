@@ -163,7 +163,7 @@ let g:neoterm_default_mod = 'botright'
 tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
-let test#strategy = "neoterm"
+let test#strategy = "neovim"
 
 " CoC.nvim
 " Remap keys for gotos
