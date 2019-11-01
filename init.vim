@@ -8,8 +8,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
+Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
@@ -23,7 +25,6 @@ Plug 'prettier/vim-prettier'
 Plug 'rhysd/clever-f.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
-Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -33,7 +34,6 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Experimental Plugins
 Plug 'junegunn/gv.vim'
@@ -50,6 +50,7 @@ set background=dark
 colorscheme gruvbox
 
 set updatetime=300
+set re=1
 
 " Better display for messages
 set cmdheight=2
@@ -87,6 +88,10 @@ nnoremap <C-l> <C-w>l
 " Correctly locate new splits
 set splitright
 set splitbelow
+
+" Make macros easier to use.
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
 
 " Remap Esc for terminal mode
 if has('nvim')
@@ -138,18 +143,6 @@ nnoremap <C-p> :Files<cr>
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
-
-" Nerdtree
-map <C-n> :NERDTreeToggle<CR>
-map - :NERDTreeFind<cr>
-" Close nerdtree if last open buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" enable line numbers
-let NERDTreeShowLineNumbers=1 
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
-"show hidden files
-let NERDTreeShowHidden=1
 
 " vim wiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
