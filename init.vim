@@ -3,6 +3,7 @@ call plug#begin()
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
@@ -48,6 +49,8 @@ call plug#end()
 " Theme 
 set background=dark
 colorscheme gruvbox
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
 
 set updatetime=300
 set re=1
