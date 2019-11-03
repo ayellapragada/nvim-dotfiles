@@ -23,7 +23,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
-Plug 'rhysd/clever-f.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
 Plug 'sheerun/vim-polyglot'
@@ -123,11 +122,6 @@ nnoremap <Leader>ta :TestSuite<cr>
 nnoremap <Leader>tv :TestVisit<cr>
 
 " Plugin Settings
-
-" clever-f
-let g:clever_f_across_no_line    = 1
-let g:clever_f_fix_key_direction = 1
-let g:clever_f_timeout_ms        = 3000
 
 " vim-sandwich
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
