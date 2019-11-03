@@ -5,9 +5,7 @@
 Ideally this one will be as easy as git pull and the after commit hooks should set things up. But until then the instructions are here for the exact details.
 
 ##  Required Setup
-Use this to make fzf :Files work the way I want it. Don't exclude hidden files, but do ignore gitignored files.
-
-`export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'`
+- None, hopefully I can keep it all in my vimrc.
 
 ## Next steps
 - Set leader key maps for whatever I need for neoterm, having ability to send code directly to a rails console is amazing.

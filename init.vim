@@ -9,14 +9,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
-Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -25,6 +24,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
+Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -34,6 +34,7 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Experimental Plugins
 Plug 'junegunn/gv.vim'
@@ -137,6 +138,11 @@ let g:sandwich#recipes += [
 
 " fzf
 nnoremap <C-p> :Files<cr>
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
@@ -155,6 +161,21 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
 let test#strategy = "neovim"
+
+" vim-startify
+let g:startify_custom_header =[]
+
+" Nerdtree
+map <C-n> :NERDTreeToggle<CR>
+map - :NERDTreeFind<cr>
+" Close nerdtree if last open buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+"show hidden files
+let NERDTreeShowHidden=1
 
 " CoC.nvim
 " Remap keys for gotos
