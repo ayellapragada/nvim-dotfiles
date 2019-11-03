@@ -46,11 +46,41 @@ call plug#end()
 
 " General Settings
 
-" Theme 
+" Theme and Lightline
 set background=dark
 colorscheme gruvbox
 let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'tabline': { 'left': [['tabs']], 'right': [] },
+      \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive',
+      \   'filename': 'LightlineFilename'
+      \ }
+      \ }
+function! LightlineModified()
+  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
+endfunction
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler' && exists('*fugitive#head')
+    return fugitive#head()
+  endif
+  return ''
+endfunction
 
 set updatetime=300
 set re=1
@@ -164,6 +194,11 @@ let test#strategy = "neovim"
 
 " vim-startify
 let g:startify_custom_header =[]
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+if has('nvim')
+  au! TabNewEntered * Startify
+endif
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
