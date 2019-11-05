@@ -11,6 +11,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
+Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
@@ -49,7 +50,6 @@ call plug#end()
 " Theme and Lightline
 set background=dark
 colorscheme gruvbox
-let g:lightline = {}
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
@@ -199,6 +199,10 @@ let g:startify_change_to_vcs_root = 1
 if has('nvim')
   au! TabNewEntered * Startify
 endif
+
+" vim-polyglot
+let g:polyglot_disabled = ['typescript']
+
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
