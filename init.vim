@@ -144,8 +144,8 @@ nnoremap <leader>m :Magit<CR>
 nmap <leader>vr :vs $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
-vnoremap <Leader>ts :TREPLSendSelection<cr>
-nnoremap <Leader>ts :TREPLSendLine<cr>
+vnoremap <Leader>ts :Topen<cr> :TREPLSendSelection<cr>
+nnoremap <Leader>ts :Topen<cr> :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
