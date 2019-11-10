@@ -13,7 +13,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
-Plug 'machakann/vim-sandwich'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'mhinz/vim-startify'
@@ -31,6 +30,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
@@ -153,19 +154,6 @@ nnoremap <Leader>ta :TestSuite<cr>
 nnoremap <Leader>tv :TestVisit<cr>
 
 " Plugin Settings
-
-" vim-sandwich
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-" add spaces inside bracket
-let g:sandwich#recipes += [
-      \   {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
-      \   {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
-      \   {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
-      \   {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
-      \   {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
-      \   {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
-      \ ]
-
 " fzf
 nnoremap <C-p> :Files<cr>
 if executable('rg')
