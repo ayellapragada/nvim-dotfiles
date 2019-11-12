@@ -16,7 +16,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
-Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -181,17 +180,8 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 " vim-test
 let test#strategy = "neovim"
 
-" vim-startify
-let g:startify_custom_header =[]
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 1
-if has('nvim')
-  au! TabNewEntered * Startify
-endif
-
 " vim-polyglot
 let g:polyglot_disabled = ['typescript']
-
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
