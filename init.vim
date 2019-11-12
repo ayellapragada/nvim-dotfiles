@@ -9,6 +9,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'leafgarland/typescript-vim'
@@ -203,6 +204,7 @@ let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 "show hidden files
 let NERDTreeShowHidden=1
+let g:NERDTreeIgnore = ['^node_modules$']
 
 " CoC.nvim
 " Remap keys for gotos
@@ -210,6 +212,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+set shortmess+=c
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
