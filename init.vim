@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
