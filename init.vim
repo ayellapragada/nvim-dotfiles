@@ -143,12 +143,12 @@ nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
-nmap <leader>vr :vs $MYVIMRC<cr>
+nmap <leader>vr :tabnew $MYVIMRC<cr>
 nmap <leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
-vnoremap <Leader>ts :Topen<cr> :TREPLSendSelection<cr>
-nnoremap <Leader>ts :Topen<cr> :TREPLSendLine<cr>
+vnoremap <Leader>ts :TREPLSendSelection<cr>
+nnoremap <Leader>ts :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
