@@ -144,6 +144,7 @@ nnoremap <leader>n :nohl<CR>
 nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
 nmap <leader>vr :vs $MYVIMRC<cr>
+nmap <leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
 vnoremap <Leader>ts :Topen<cr> :TREPLSendSelection<cr>
