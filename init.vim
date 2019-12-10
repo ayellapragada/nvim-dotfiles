@@ -2,8 +2,9 @@
 call plug#begin()
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -37,6 +38,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'yarisgutierrez/ayu-lightline'
 
 " Experimental Plugins
 Plug 'junegunn/gv.vim'
@@ -49,10 +51,16 @@ call plug#end()
 " General Settings
 
 " Theme and Lightline
-set background=dark
-colorscheme gruvbox
+set termguicolors
+let ayucolor="mirage"
+colorscheme ayu
+
+" set background=dark
+" colorscheme gruvbox
+      " \ 'colorscheme': 'gruvbox',
+
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'ayu',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
       \ },
@@ -127,10 +135,17 @@ set splitbelow
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
+" Filetypes
+au BufNewFile,BufRead *.df, setf Dockerfile
+
 " Remap Esc for terminal mode
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
+
+" Tmux stuff
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 " Leader and easier command
 let mapleader = " "
