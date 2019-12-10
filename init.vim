@@ -211,6 +211,7 @@ autocmd FileType nerdtree setlocal relativenumber
 "show hidden files
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['^node_modules$']
+let NERDTreeMinimalUI = 1
 
 " CoC.nvim
 " Remap keys for gotos
