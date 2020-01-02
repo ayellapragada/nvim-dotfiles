@@ -5,6 +5,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'gruvbox-community/gruvbox'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -247,4 +248,9 @@ if (empty($TMUX))
   if (has("termguicolors"))
     set termguicolors
   endif
+endif
+
+" Firenvim or for when neovim is in browswer
+if exists('g:started_by_firenvim')
+  set guicursor=a:block-blinkon0
 endif
