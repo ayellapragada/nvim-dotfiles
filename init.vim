@@ -4,6 +4,7 @@ Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dense-analysis/ale'
 " Plug 'gruvbox-community/gruvbox'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'itchyny/lightline.vim'
@@ -13,8 +14,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kana/vim-textobj-user'
-Plug 'kassio/neoterm'
-Plug 'leafgarland/typescript-vim'
+Plug 'kassio/neoterm' 
+Plug 'leafgarland/typescript-vim' 
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim'
 Plug 'metakirby5/codi.vim'
@@ -26,6 +27,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
 Plug 'rlue/vim-fold-rspec'
+Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -36,7 +38,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'yarisgutierrez/ayu-lightline'
@@ -158,6 +159,7 @@ nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
+nnoremap <Leader>nf :Neoformat<cr>
 nmap <leader>vr :tabnew $MYVIMRC<cr>
 nmap <leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <leader>so :source $MYVIMRC<cr>
@@ -220,6 +222,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gh <Plug>(coc-fix-current)
 set shortmess+=c
 
 " Use K to show documentation in preview window
