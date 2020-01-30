@@ -48,6 +48,7 @@ Plug 'mattn/emmet-vim'
 Plug 'machakann/vim-swap'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-projectionist'
+Plug 'wellle/context.vim'
 call plug#end()
 
 " General Settings
@@ -159,7 +160,7 @@ nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
-nnoremap <Leader>nf :Neoformat<cr>
+nnoremap <Leader>fn :Neoformat<cr>
 nmap <leader>vr :tabnew $MYVIMRC<cr>
 nmap <leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <leader>so :source $MYVIMRC<cr>
