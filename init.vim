@@ -1,23 +1,23 @@
 " Plugins
 call plug#begin()
+Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'ayu-theme/ayu-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'dyng/ctrlsf.vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/gv.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm' 
 Plug 'leafgarland/typescript-vim' 
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim'
-Plug 'metakirby5/codi.vim'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -25,9 +25,7 @@ Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
-Plug 'rlue/vim-fold-rspec'
 Plug 'sbdchd/neoformat'
-Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -35,33 +33,30 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'troydm/zoomwintab.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'yarisgutierrez/ayu-lightline'
 
 " Experimental Plugins
-Plug 'junegunn/gv.vim'
+Plug 'lambdalisue/fern.vim'
 Plug 'mattn/emmet-vim'
 Plug 'machakann/vim-swap'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-projectionist'
+Plug 'troydm/zoomwintab.vim'
 call plug#end()
 
 " General Settings
 
 " Theme and Lightline
 set termguicolors
-let ayucolor="mirage"
-colorscheme ayu
-
-" set background=dark
+set background=dark
+colorscheme gruvbox
 
 let g:lightline = {
-      \ 'colorscheme': 'ayu',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
       \ },
       \ 'tabline': { 'left': [['tabs']], 'right': [] },
       \ 'component_function': {
@@ -101,7 +96,7 @@ set signcolumn=yes
 set number
 set relativenumber
 
-" " Better Search
+" Better Search
 set ignorecase
 set smartcase
 set incsearch
@@ -154,8 +149,6 @@ nnoremap , :
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :CtrlSF <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
-nnoremap <leader>co :Codi!!<CR>
-nnoremap <leader>m :Magit<CR>
 nnoremap <Leader>fn :Neoformat<cr>
 nmap <leader>vr :tabnew $MYVIMRC<cr>
 nmap <leader>vt :tabnew ~/.tmux.conf<cr>
@@ -166,8 +159,7 @@ nnoremap <Leader>ts :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
-nnoremap <Leader>ta :TestSuite<cr>
-nnoremap <Leader>tv :TestVisit<cr>
+map <Leader>yc :YankCode<cr>
 
 " Plugin Settings
 " fzf
@@ -199,19 +191,9 @@ let test#strategy = "neovim"
 " vim-polyglot
 let g:polyglot_disabled = ['typescript']
 
-" Nerdtree
-map <C-n> :NERDTreeToggle<CR>
-map - :NERDTreeFind<cr>
-" Close nerdtree if last open buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" enable line numbers
-let NERDTreeShowLineNumbers=1
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
-"show hidden files
-let NERDTreeShowHidden=1
-let g:NERDTreeIgnore = ['^node_modules$']
-let NERDTreeMinimalUI = 1
+" fern.vim
+nmap - :Fern . -reveal=%<cr>
+nmap <C-n> :Fern . -drawer -toggle<CR>
 
 " CoC.nvim
 " Remap keys for gotos
@@ -248,9 +230,4 @@ if (empty($TMUX))
   if (has("termguicolors"))
     set termguicolors
   endif
-endif
-
-" Firenvim or for when neovim is in browswer
-if exists('g:started_by_firenvim')
-  set guicursor=a:block-blinkon0
 endif
