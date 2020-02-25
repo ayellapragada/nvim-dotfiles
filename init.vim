@@ -5,8 +5,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
-" Plug 'gruvbox-community/gruvbox'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'dyng/ctrlsf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -48,7 +47,6 @@ Plug 'mattn/emmet-vim'
 Plug 'machakann/vim-swap'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-projectionist'
-Plug 'wellle/context.vim'
 call plug#end()
 
 " General Settings
@@ -59,8 +57,6 @@ let ayucolor="mirage"
 colorscheme ayu
 
 " set background=dark
-" colorscheme gruvbox
-      " \ 'colorscheme': 'gruvbox',
 
 let g:lightline = {
       \ 'colorscheme': 'ayu',
@@ -105,7 +101,7 @@ set signcolumn=yes
 set number
 set relativenumber
 
-" Better Search
+" " Better Search
 set ignorecase
 set smartcase
 set incsearch
@@ -156,7 +152,7 @@ nnoremap , :
 
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
-nnoremap <Leader>fg :Rg <C-R><C-W><CR>
+nnoremap <Leader>fg :CtrlSF <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <leader>co :Codi!!<CR>
 nnoremap <leader>m :Magit<CR>
