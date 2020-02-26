@@ -194,6 +194,17 @@ let g:polyglot_disabled = ['typescript']
 " fern.vim
 nmap - :Fern . -reveal=%<cr>
 nmap <C-n> :Fern . -drawer -toggle<CR>
+function! s:init_fern() abort
+  nmap <buffer><expr>
+      \ <Plug>(fern-my-expand-or-collapse)
+      \ fern#smart#leaf(
+      \   "\<Plug>(fern-action-collapse)",
+      \   "\<Plug>(fern-action-expand)",
+      \   "\<Plug>(fern-action-collapse)",
+      \ )
+
+  nmap <buffer><nowait> l <Plug>(fern-my-expand-or-collapse)
+endfunction
 
 " CoC.nvim
 " Remap keys for gotos
