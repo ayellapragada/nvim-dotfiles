@@ -3,10 +3,11 @@ call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'arzg/vim-colors-xcode'
+Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'dyng/ctrlsf.vim'
-Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -14,8 +15,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kana/vim-textobj-user'
-Plug 'kassio/neoterm' 
-Plug 'leafgarland/typescript-vim' 
+Plug 'kassio/neoterm'
+Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim'
 Plug 'mhinz/vim-signify'
@@ -53,10 +54,9 @@ call plug#end()
 " Theme and Lightline
 set termguicolors
 set background=dark
-colorscheme gruvbox
+colorscheme xcodedarkhc
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
@@ -123,6 +123,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+nnoremap <Backspace> <C-^>
 
 " Correctly locate new splits
 set splitright
