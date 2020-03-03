@@ -200,8 +200,10 @@ let g:polyglot_disabled = ['typescript']
 nmap - :Fern . -reveal=%<cr>
 nmap <C-n> :Fern . -drawer -toggle<CR>
 function! s:init_fern() abort
+  " REALLY DO NOT WANT TO ADD MUCH INTO HERE BEYOND WHAT IS _NEEDED_
   " Unmap Ctrl-h for tmux split navigation
   unmap <buffer> <C-h>
+  nmap <buffer> <C-l> <C-w>l
 
   " Recenter page, same as in normie mode
   nmap <buffer> zz zz
