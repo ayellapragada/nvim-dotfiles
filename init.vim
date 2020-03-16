@@ -16,6 +16,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
+Plug 'kshenoy/vim-signature'
+Plug 'lambdalisue/fern.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'markonm/traces.vim'
@@ -34,13 +36,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 " Experimental Plugins
-Plug 'lambdalisue/fern.vim'
 Plug 'mattn/emmet-vim'
 Plug 'machakann/vim-swap'
+Plug 'jceb/vim-orgmode'
 " This is a  cool plugin, but will comment out until updated.
 " Don't take over key binding, and on lose-focus close out.
 " Plug 'pechorin/any-jump.nvim'
@@ -175,6 +178,13 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
+" CtrlSF
+" When search is done, if it's done very quickly, will focus search pane.
+let g:ctrlsf_auto_focus = {
+    \ "at": "done",
+    \ "duration_less_than": 1000
+    \ }
+
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
 
@@ -198,7 +208,7 @@ let g:polyglot_disabled = ['typescript']
 
 " fern.vim
 nmap - :Fern . -reveal=%<cr>
-nmap <C-n> :Fern . -drawer -toggle<CR>
+nmap <C-n> :Fern . -drawer -width=50 -toggle<CR>
 function! s:init_fern() abort
   " REALLY DO NOT WANT TO ADD MUCH INTO HERE BEYOND WHAT IS _NEEDED_
   " Unmap Ctrl-h for tmux split navigation
