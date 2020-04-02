@@ -7,7 +7,6 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
-Plug 'dyng/ctrlsf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -16,6 +15,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
+" Plug 'kkoomen/vim-doge'
 Plug 'kshenoy/vim-signature'
 Plug 'lambdalisue/fern.vim'
 Plug 'leafgarland/typescript-vim'
@@ -153,9 +153,14 @@ autocmd VimResized * :wincmd =
 let mapleader = " "
 nnoremap , :
 
+" Folding
+set foldmethod=indent
+set foldcolumn=2
+set nofoldenable
+
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
-nnoremap <Leader>fg :CtrlSF <C-R><C-W><CR>
+nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>fn :Neoformat<cr>
 nmap <leader>vr :tabnew $MYVIMRC<cr>
@@ -177,13 +182,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
-
-" CtrlSF
-" When search is done, if it's done very quickly, will focus search pane.
-let g:ctrlsf_auto_focus = {
-    \ "at": "done",
-    \ "duration_less_than": 1000
-    \ }
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
@@ -266,6 +264,9 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Splitjoin
+let g:splitjoin_ruby_hanging_args = 0
 
 " True Colors
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
