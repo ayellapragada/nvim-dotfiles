@@ -1,5 +1,6 @@
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
+Plug 'alok/notational-fzf-vim'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'arzg/vim-colors-xcode'
@@ -169,6 +170,7 @@ nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>fn :Neoformat<cr>
+nmap <leader>vn :NV!<cr>
 nmap <leader>vr :tabnew $MYVIMRC<cr>
 nmap <leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <leader>so :source $MYVIMRC<cr>
@@ -197,6 +199,10 @@ let g:highlightedyank_highlight_duration = 250
 " vim wiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" notational veloctiry
+let g:nv_search_paths = ['~/vimwiki']
+
 
 " neoterm
 command! -nargs=+ TT Topen | T <args>
