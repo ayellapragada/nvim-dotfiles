@@ -1,10 +1,9 @@
-" Plugins
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'arzg/vim-colors-xcode'
-Plug 'axelf4/vim-strip-trailing-whitespace'
+" Plug 'arzg/vim-colors-xcode'
+Plug 'chuling/vim-equinusocio-material' " equinusocio_material
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
@@ -15,11 +14,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
-" Plug 'kkoomen/vim-doge'
 Plug 'kshenoy/vim-signature'
 Plug 'lambdalisue/fern.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
+Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -28,11 +27,12 @@ Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -41,14 +41,14 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 " Experimental Plugins
-Plug 'mattn/emmet-vim'
-Plug 'machakann/vim-swap'
-Plug 'jceb/vim-orgmode'
-" This is a  cool plugin, but will comment out until updated.
-" Don't take over key binding, and on lose-focus close out.
+Plug 'axelf4/vim-strip-trailing-whitespace'
+" Plug 'mattn/emmet-vim'
+" Plug 'jceb/vim-orgmode'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'kkoomen/vim-doge'
+" Plug 'dyng/ctrlsf.vim'
 " Plug 'pechorin/any-jump.nvim'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-projectionist'
 Plug 'troydm/zoomwintab.vim'
 call plug#end()
 
@@ -56,10 +56,16 @@ call plug#end()
 
 " Theme and Lightline
 set termguicolors
-set background=dark
-colorscheme xcodedarkhc
+" I really did like xcodedarkhc so I may change back to it.
+" xcodedarkhc theme
+" set background=dark
+" colorscheme xcodedarkhc
+
+let g:equinusocio_material_darker = 1
+colorscheme equinusocio_material
 
 let g:lightline = {
+      \ 'colorscheme': 'equinusocio_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
@@ -182,6 +188,8 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
+let g:fzf_preview_window = 'right:60%'
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
