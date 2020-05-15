@@ -3,8 +3,7 @@ Plug 'AaronLasseigne/yank-code'
 Plug 'alok/notational-fzf-vim'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'arzg/vim-colors-xcode'
-Plug 'chuling/vim-equinusocio-material' " equinusocio_material
+Plug 'arzg/vim-colors-xcode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
@@ -45,10 +44,7 @@ Plug 'wellle/targets.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 " Plug 'mattn/emmet-vim'
 " Plug 'jceb/vim-orgmode'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'kkoomen/vim-doge'
-" Plug 'dyng/ctrlsf.vim'
-" Plug 'pechorin/any-jump.nvim'
 Plug 'tpope/vim-abolish'
 Plug 'troydm/zoomwintab.vim'
 call plug#end()
@@ -57,16 +53,10 @@ call plug#end()
 
 " Theme and Lightline
 set termguicolors
-" I really did like xcodedarkhc so I may change back to it.
-" xcodedarkhc theme
-" set background=dark
-" colorscheme xcodedarkhc
-
-let g:equinusocio_material_darker = 1
-colorscheme equinusocio_material
+set background=dark
+colorscheme xcodedarkhc
 
 let g:lightline = {
-      \ 'colorscheme': 'equinusocio_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
@@ -170,10 +160,10 @@ nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>fn :Neoformat<cr>
-nmap <leader>vn :NV!<cr>
-nmap <leader>vr :tabnew $MYVIMRC<cr>
-nmap <leader>vt :tabnew ~/.tmux.conf<cr>
-nmap <leader>so :source $MYVIMRC<cr>
+nmap <Leader>vn :NV!<cr>
+nmap <Leader>vr :tabnew $MYVIMRC<cr>
+nmap <Leader>vt :tabnew ~/.tmux.conf<cr>
+nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
 vnoremap <Leader>ts :TREPLSendSelection<cr>
 nnoremap <Leader>ts :TREPLSendLine<cr>
@@ -210,6 +200,7 @@ let g:neoterm_autoscroll = '1'
 let g:neoterm_size = 16
 let g:neoterm_repl_ruby = 'pry'
 let g:neoterm_default_mod = 'botright'
+let g:neoterm_automap_keys = 'ztt'
 tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
