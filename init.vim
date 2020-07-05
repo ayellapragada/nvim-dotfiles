@@ -20,6 +20,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -136,6 +137,8 @@ vnoremap Q :norm @q<cr>
 
 " Filetypes
 au BufNewFile,BufRead *.df, setf Dockerfile
+au BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
 
 " Remap Esc for terminal mode
 if has('nvim')
@@ -272,6 +275,9 @@ endfunction
 
 " Splitjoin
 let g:splitjoin_ruby_hanging_args = 0
+
+" Closetag
+let g:closetag_filetypes = 'html,xhtml,javascript,jsx,tsx'
 
 " True Colors
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
