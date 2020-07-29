@@ -44,6 +44,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'psliwka/vim-smoothie'
 
 " Experimental Plugins
 " Plug 'mattn/emmet-vim'
