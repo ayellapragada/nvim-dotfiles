@@ -3,6 +3,7 @@ Plug 'AaronLasseigne/yank-code'
 Plug 'alok/notational-fzf-vim'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
@@ -31,6 +32,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'sainnhe/sonokai'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -43,9 +45,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 " Experimental Plugins
-Plug 'axelf4/vim-strip-trailing-whitespace'
 " Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-abolish'
 call plug#end()
 
 " General Settings
@@ -202,7 +202,6 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 
 " notational veloctiry
 let g:nv_search_paths = ['~/vimwiki']
-
 
 " neoterm
 command! -nargs=+ TT Topen | T <args>
