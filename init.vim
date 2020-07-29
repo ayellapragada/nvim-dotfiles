@@ -29,7 +29,6 @@ Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
-Plug 'sainnhe/sonokai'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
@@ -44,6 +43,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
+Plug 'drewtempelmeyer/palenight.vim'
+
 " Experimental Plugins
 " Plug 'mattn/emmet-vim'
 call plug#end()
@@ -51,20 +52,15 @@ call plug#end()
 " General Settings
 
 " Theme and Lightline
-" Important!!
 if has('termguicolors')
   set termguicolors
 endif
 
-" The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
-
-colorscheme sonokai
+set background=dark
+colorscheme palenight
 
 let g:lightline = {
-      \ 'colorscheme' : 'sonokai',
+      \ 'colorscheme' : 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
