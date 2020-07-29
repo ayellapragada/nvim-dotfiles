@@ -266,6 +266,7 @@ nmap <silent> gh <Plug>(coc-fix-current)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gn <Plug>(coc-rename)
 set shortmess+=c
 
 " Use K to show documentation in preview window
@@ -281,8 +282,10 @@ endfunction
 
 let g:coc_global_extensions = [
       \ 'coc-actions',
+      \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-json',
+      \ 'coc-prettier',
       \ 'coc-solargraph',
       \ 'coc-sql',
       \ 'coc-tsserver'
