@@ -162,7 +162,7 @@ nnoremap , :
 
 " Folding
 set foldmethod=indent
-set foldcolumn=2
+set foldcolumn=0
 set nofoldenable
 
 "Leader Mappings
