@@ -3,7 +3,6 @@ Plug 'AaronLasseigne/yank-code'
 Plug 'alok/notational-fzf-vim'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'arzg/vim-colors-xcode'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
@@ -41,6 +40,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
+Plug 'sainnhe/sonokai'
+
+
 " Experimental Plugins
 Plug 'axelf4/vim-strip-trailing-whitespace'
 " Plug 'mattn/emmet-vim'
@@ -53,11 +55,20 @@ call plug#end()
 " General Settings
 
 " Theme and Lightline
-set termguicolors
-set background=dark
-colorscheme xcodedarkhc
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
+
+" The configuration options should be placed before `colorscheme sonokai`.
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
 
 let g:lightline = {
+      \ 'colorscheme' : 'sonokai',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
