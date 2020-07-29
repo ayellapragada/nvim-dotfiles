@@ -31,6 +31,7 @@ Plug 'prettier/vim-prettier'
 Plug 'rhysd/git-messenger.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
 Plug 'sheerun/vim-polyglot'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -259,11 +260,12 @@ augroup END
 
 " CoC.nvim
 " Remap keys for gotos
+nmap <silent> ga <Plug>(coc-codeaction)
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gh <Plug>(coc-fix-current)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gh <Plug>(coc-fix-current)
+nmap <silent> gy <Plug>(coc-type-definition)
 set shortmess+=c
 
 " Use K to show documentation in preview window
@@ -276,6 +278,23 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+let g:coc_global_extensions = [
+      \ 'coc-actions',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-solargraph',
+      \ 'coc-sql',
+      \ 'coc-tsserver'
+      \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 " Splitjoin
 let g:splitjoin_ruby_hanging_args = 0
