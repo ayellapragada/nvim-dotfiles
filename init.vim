@@ -44,7 +44,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'psliwka/vim-smoothie'
+Plug 'liuchengxu/vista.vim'
 
 " Experimental Plugins
 " Plug 'mattn/emmet-vim'
@@ -64,12 +64,13 @@ let g:lightline = {
       \ 'colorscheme' : 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
       \ },
       \ 'tabline': { 'left': [['tabs']], 'right': [] },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',
-      \   'filename': 'LightlineFilename'
+      \   'filename': 'LightlineFilename',
+      \   'cocstatus': 'coc#status'
       \ }
       \ }
 function! LightlineModified()
@@ -281,6 +282,16 @@ let g:splitjoin_ruby_hanging_args = 0
 
 " Closetag
 let g:closetag_filetypes = 'html,xhtml,javascript,jsx,tsx'
+
+" Vista
+let g:vista_default_executive = 'coc'
+let g:vista_executive_for = {
+      \ 'vimwiki': 'markdown',
+      \ 'pandoc': 'markdown',
+      \ 'markdown': 'toc',
+      \ }
+let g:vista_sidebar_width = 40
+let g:vista#renderer#enable_icon = 0
 
 " True Colors
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
