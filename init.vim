@@ -47,6 +47,9 @@ Plug 'wellle/targets.vim'
 
 " Experimental Plugins
 " Plug 'mattn/emmet-vim'
+Plug 'DanilaMihailov/beacon.nvim'
+Plug 'psliwka/vim-smoothie'
+Plug 'RobertAudi/GoldenView.vim'
 call plug#end()
 
 " General Settings
@@ -312,6 +315,11 @@ let g:vista_executive_for = {
       \ }
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
+
+" smoothie
+" I want to speed it up
+let g:smoothie_update_interval = 20
+let g:smoothie_base_speed = 20
 
 " True Colors
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
