@@ -5,6 +5,7 @@ Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'DanilaMihailov/beacon.nvim'
 Plug 'dense-analysis/ale'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'itchyny/lightline.vim'
@@ -13,6 +14,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
 Plug 'kkoomen/vim-doge'
@@ -29,8 +31,9 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'prettier/vim-prettier'
+Plug 'psliwka/vim-smoothie'
 Plug 'rhysd/git-messenger.vim'
+Plug 'RobertAudi/GoldenView.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
@@ -47,9 +50,6 @@ Plug 'wellle/targets.vim'
 
 " Experimental Plugins
 " Plug 'mattn/emmet-vim'
-Plug 'DanilaMihailov/beacon.nvim'
-Plug 'psliwka/vim-smoothie'
-Plug 'RobertAudi/GoldenView.vim'
 call plug#end()
 
 " General Settings
@@ -110,7 +110,6 @@ set relativenumber
 " Better Search
 set ignorecase
 set smartcase
-set incsearch
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -168,11 +167,10 @@ set nofoldenable
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
-nnoremap <leader>n :nohl<CR>
-nnoremap <Leader>fn :Neoformat<cr>
-nmap <Leader>vn :NV!<cr>
+nnoremap <leader>nl :nohl<CR>
+nnoremap <Leader>nf :Neoformat<cr>
+nmap <Leader>nv :NV!<cr>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
-nmap <Leader>vt :tabnew ~/.tmux.conf<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
 vnoremap <Leader>ts :TREPLSendSelection<cr>
@@ -292,14 +290,6 @@ let g:coc_global_extensions = [
       \ 'coc-tsserver'
       \ ]
 
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
 " Splitjoin
 let g:splitjoin_ruby_hanging_args = 0
 
@@ -310,7 +300,6 @@ let g:closetag_filetypes = 'html,xhtml,javascript,jsx,tsx'
 let g:vista_default_executive = 'coc'
 let g:vista_executive_for = {
       \ 'vimwiki': 'markdown',
-      \ 'pandoc': 'markdown',
       \ 'markdown': 'toc',
       \ }
 let g:vista_sidebar_width = 40
@@ -318,16 +307,6 @@ let g:vista#renderer#enable_icon = 0
 
 " smoothie
 " I want to speed it up
-let g:smoothie_update_interval = 20
 let g:smoothie_base_speed = 20
 
-" True Colors
-" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
