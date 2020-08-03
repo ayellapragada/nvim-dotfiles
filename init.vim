@@ -49,7 +49,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 " Experimental Plugins
-" Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim' " Honestly I just don't know how to use this
+" Plug 'ms-jpq/chadtree' " A possible alternative for fern.vim
 call plug#end()
 
 " General Settings
@@ -58,6 +59,7 @@ call plug#end()
 if has('termguicolors')
   set termguicolors
 endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set background=dark
 colorscheme palenight
@@ -167,9 +169,9 @@ set nofoldenable
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
-nnoremap <leader>nl :nohl<CR>
-nnoremap <Leader>nf :Neoformat<cr>
-nmap <Leader>nv :NV!<cr>
+nnoremap <leader>n :nohl<CR>
+nnoremap <Leader>fa :Neoformat<cr>
+nmap <Leader>vn :NV!<cr>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
@@ -308,5 +310,3 @@ let g:vista#renderer#enable_icon = 0
 " smoothie
 " I want to speed it up
 let g:smoothie_base_speed = 20
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
