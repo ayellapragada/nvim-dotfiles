@@ -67,12 +67,11 @@ colorscheme palenight
 let g:lightline = {
       \ 'colorscheme' : 'palenight',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
       \ },
       \ 'tabline': { 'left': [['tabs']], 'right': [] },
       \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
       \   'filename': 'LightlineFilename',
       \   'cocstatus': 'coc#status'
       \ }
@@ -90,12 +89,6 @@ function! LightlineFilename()
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-function! LightlineFugitive()
-  if &ft !~? 'vimfiler' && exists('*fugitive#head')
-    return fugitive#head()
-  endif
-  return ''
 endfunction
 
 set updatetime=300
@@ -307,6 +300,8 @@ let g:vista_executive_for = {
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
 
+" MaxMEllon jsx,  have pietalin/vim-jsx-typescript
+let g:vim_jsx_pretty_disable_tsx = 1
+
 " smoothie
-" I want to speed it up
-let g:smoothie_base_speed = 20
+let g:smoothie_base_speed = 20 " I want to speed it up
