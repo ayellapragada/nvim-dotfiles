@@ -1,3 +1,6 @@
+" vim-polyglot - This needs to be loaded first
+let g:polyglot_disabled = ['typescript']
+
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alok/notational-fzf-vim'
@@ -207,9 +210,6 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
 let test#strategy = "neovim"
-
-" vim-polyglot
-let g:polyglot_disabled = ['typescript']
 
 " fern.vim
 nmap - :Fern . -reveal=%<cr>
