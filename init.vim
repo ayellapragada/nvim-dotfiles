@@ -1,16 +1,12 @@
-" vim-polyglot - This needs to be loaded first
-let g:polyglot_disabled = ['typescript']
-
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
-Plug 'alok/notational-fzf-vim'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'DanilaMihailov/beacon.nvim'
 Plug 'dense-analysis/ale'
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -33,12 +29,10 @@ Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'psliwka/vim-smoothie'
 Plug 'rhysd/git-messenger.vim'
-Plug 'RobertAudi/GoldenView.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -50,10 +44,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-
-" Experimental Plugins
-" Plug 'mattn/emmet-vim' " Honestly I just don't know how to use this
-" Plug 'ms-jpq/chadtree' " A possible alternative for fern.vim
 call plug#end()
 
 " General Settings
@@ -64,11 +54,10 @@ if has('termguicolors')
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-set background=dark
-colorscheme palenight
+colorscheme dracula
 
 let g:lightline = {
-      \ 'colorscheme' : 'palenight',
+      \ 'colorscheme' : 'dracula',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
@@ -167,9 +156,9 @@ nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>fa :Neoformat<cr>
-nmap <Leader>vn :NV!<cr>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
+nnoremap <Leader>vv :Vista!!<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
 vnoremap <Leader>ts :TREPLSendSelection<cr>
 nnoremap <Leader>ts :TREPLSendLine<cr>
@@ -195,9 +184,6 @@ let g:highlightedyank_highlight_duration = 250
 " vim wiki
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
-" notational veloctiry
-let g:nv_search_paths = ['~/vimwiki']
 
 " neoterm
 command! -nargs=+ TT Topen | T <args>
@@ -254,7 +240,7 @@ augroup END
 
 " CoC.nvim
 " Remap keys for gotos
-nmap <silent> ga <Plug>(coc-codeaction)
+nmap <silent> ga <Plug>(coc-codeaction-selected)w
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gh <Plug>(coc-fix-current)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -303,5 +289,12 @@ let g:vista#renderer#enable_icon = 0
 " MaxMEllon jsx,  have pietalin/vim-jsx-typescript
 let g:vim_jsx_pretty_disable_tsx = 1
 
-" smoothie
-let g:smoothie_base_speed = 20 " I want to speed it up
+" TreeSitter Config
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
