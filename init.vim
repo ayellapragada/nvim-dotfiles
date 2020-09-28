@@ -4,8 +4,8 @@ Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
+Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'DanilaMihailov/beacon.nvim'
 Plug 'dense-analysis/ale'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'itchyny/lightline.vim'
@@ -20,20 +20,18 @@ Plug 'kassio/neoterm'
 Plug 'kkoomen/vim-doge'
 Plug 'kshenoy/vim-signature'
 Plug 'lambdalisue/fern.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -45,9 +43,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-
-Plug 'brooth/far.vim'
-Plug 'rhysd/conflict-marker.vim'
 call plug#end()
 
 " General Settings
@@ -88,7 +83,7 @@ function! LightlineFilename()
 endfunction
 
 set updatetime=300
-set re=1
+set re=0
 
 " Better display for messages
 set cmdheight=2
@@ -132,11 +127,6 @@ set splitbelow
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
-" Filetypes
-au BufNewFile,BufRead *.df, setf Dockerfile
-au BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-
-
 " Remap Esc for terminal mode
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -170,20 +160,6 @@ nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
 map <Leader>yc :YankCode<cr>
-
-function! QuickFix_toggle()
-  for i in range(1, winnr('$'))
-    let bnum = winbufnr(i)
-    if getbufvar(bnum, '&buftype') == 'quickfix'
-      cclose
-      return
-    endif
-  endfor
-
-  copen
-endfunction
-
-nnoremap <silent> cq :call QuickFix_toggle()<cr>
 
 " Plugin Settings
 " fzf
@@ -303,16 +279,3 @@ let g:vista_executive_for = {
       \ }
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
-
-" MaxMEllon jsx,  have pietalin/vim-jsx-typescript
-let g:vim_jsx_pretty_disable_tsx = 1
-
-" TreeSitter Config
-:lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"ruby", "javascript", "typescript"},
-  highlight = {
-    enable = true,
-  },
-}
-EOF
