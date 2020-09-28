@@ -28,6 +28,7 @@ Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
@@ -56,7 +57,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme dracula
 
 let g:lightline = {
-      \ 'colorscheme' : 'dracula',
+      \ 'colorscheme': 'dracula',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
@@ -279,3 +280,13 @@ let g:vista_executive_for = {
       \ }
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
+
+" Tree Sitter
+:lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"ruby", "typescript", "javascript", "tsx"},     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
