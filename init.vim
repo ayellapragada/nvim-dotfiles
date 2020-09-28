@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'DanilaMihailov/beacon.nvim'
@@ -44,6 +45,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
+
+Plug 'brooth/far.vim'
+Plug 'rhysd/conflict-marker.vim'
 call plug#end()
 
 " General Settings
@@ -166,6 +170,20 @@ nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
 map <Leader>yc :YankCode<cr>
+
+function! QuickFix_toggle()
+  for i in range(1, winnr('$'))
+    let bnum = winbufnr(i)
+    if getbufvar(bnum, '&buftype') == 'quickfix'
+      cclose
+      return
+    endif
+  endfor
+
+  copen
+endfunction
+
+nnoremap <silent> cq :call QuickFix_toggle()<cr>
 
 " Plugin Settings
 " fzf
@@ -290,11 +308,11 @@ let g:vista#renderer#enable_icon = 0
 let g:vim_jsx_pretty_disable_tsx = 1
 
 " TreeSitter Config
-lua <<EOF
+:lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  ensure_installed = {"ruby", "javascript", "typescript"},
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = true,
   },
 }
 EOF
