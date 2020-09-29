@@ -3,11 +3,11 @@ Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'arzg/vim-colors-xcode'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
@@ -32,7 +32,6 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'sbdchd/neoformat' " SPEND SOME TIME GETTING THIS SET UP
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -54,10 +53,10 @@ if has('termguicolors')
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme dracula
+colorscheme xcodedarkhc
 
 let g:lightline = {
-      \ 'colorscheme': 'dracula',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
@@ -165,6 +164,7 @@ map <Leader>yc :YankCode<cr>
 " Plugin Settings
 " fzf
 nnoremap <C-p> :Files<cr>
+nnoremap <C-b> :Buffers<cr>
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
@@ -284,9 +284,10 @@ let g:vista#renderer#enable_icon = 0
 " Tree Sitter
 :lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"ruby", "typescript", "javascript", "tsx"},     -- one of "all", "language", or a list of languages
+  ensure_installed = {"typescript", "javascript", "tsx"},     -- one of "all", "language", or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = true,
+    disable = { "ruby" }
   },
 }
 EOF
