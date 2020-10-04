@@ -199,8 +199,8 @@ nmap - :Fern . -reveal=%<cr>
 nmap <C-n> :Fern . -drawer -width=50 -toggle<CR>
 function! s:init_fern() abort
   " REALLY DO NOT WANT TO ADD MUCH INTO HERE BEYOND WHAT IS _NEEDED_
-  " Unmap Ctrl-h for tmux split navigation
-  unmap <buffer> <C-h>
+  " Unmap Ctrl-h for tmux split navigation, except a new bug is here?
+  " unmap <buffer> <C-h>
   nmap <buffer> <C-l> <C-w>l
 
   " Recenter page, same as in normie mode
@@ -282,6 +282,9 @@ let g:vista_executive_for = {
       \ }
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
+
+" VimWiki remap
+nmap [][] <Plug>VimwikiRemoveHeaderLevel
 
 " Tree Sitter
 :lua <<EOF
