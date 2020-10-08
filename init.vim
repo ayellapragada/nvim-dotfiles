@@ -27,6 +27,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
 Plug 'mattn/emmet-vim'
+Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -147,6 +148,11 @@ nnoremap , :
 set foldmethod=indent
 set foldcolumn=0
 set nofoldenable
+
+" Mappings for longer undo history
+set undodir=$HOME."/.undodir"
+set undofile
+set undolevels=10000
 
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
