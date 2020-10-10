@@ -35,7 +35,6 @@ Plug 'neoclide/jsonc.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
-Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -150,7 +149,7 @@ set foldcolumn=0
 set nofoldenable
 
 " Mappings for longer undo history
-set undodir=$HOME."/.undodir"
+set undodir=~/.undodir
 set undofile
 set undolevels=10000
 
@@ -158,7 +157,6 @@ set undolevels=10000
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
-nnoremap <Leader>fa :Neoformat<cr>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>vv :Vista!!<cr>
@@ -255,6 +253,9 @@ set shortmess+=c
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Format :call CocAction('format')
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
