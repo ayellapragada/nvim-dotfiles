@@ -156,6 +156,7 @@ set undolevels=10000
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
+nnoremap <Leader>fa :Format<CR>
 nnoremap <leader>n :nohl<CR>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
