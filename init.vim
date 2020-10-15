@@ -148,11 +148,6 @@ set foldmethod=indent
 set foldcolumn=0
 set nofoldenable
 
-" Mappings for longer undo history
-set undodir=~/.undodir
-set undofile
-set undolevels=10000
-
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>

@@ -1,6 +1,8 @@
 {
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "prettier.disableSuccessMessage": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
   "languageserver": {
     "haskell": {
       "command": "hie-wrapper",
