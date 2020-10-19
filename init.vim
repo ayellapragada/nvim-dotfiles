@@ -27,14 +27,17 @@ Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
-Plug 'mattn/emmet-vim'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -46,11 +49,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-
-Plug 'sheerun/vim-polyglot'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 " General Settings
@@ -284,7 +282,12 @@ let g:coc_global_extensions = [
 let g:splitjoin_ruby_hanging_args = 0
 
 " Closetag
-let g:closetag_filetypes = 'html,xhtml,javascript,jsx,tsx'
+let g:closetag_filetypes = 'html,xhtml,javascript,jsx,typescript,tsx'
+let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
+" Tagalong
+let g:tagalong_additional_filetypes = ['tsx']
 
 " Vista
 let g:vista_default_executive = 'coc'
