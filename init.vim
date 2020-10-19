@@ -1,3 +1,5 @@
+let g:ale_disable_lsp = 1
+
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
