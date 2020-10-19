@@ -19,7 +19,6 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user'
 Plug 'kassio/neoterm'
-Plug 'kkoomen/vim-doge'
 Plug 'kshenoy/vim-signature'
 Plug 'lambdalisue/fern.vim'
 Plug 'liuchengxu/vista.vim'
@@ -32,7 +31,6 @@ Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-abolish'
@@ -46,6 +44,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
+
+Plug 'sheerun/vim-polyglot'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 " General Settings
@@ -163,6 +166,8 @@ nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
 map <Leader>yc :YankCode<cr>
+
+nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
 " fzf
@@ -290,14 +295,3 @@ let g:vista#renderer#enable_icon = 0
 
 " VimWiki remap
 nmap [][] <Plug>VimwikiRemoveHeaderLevel
-
-" Tree Sitter
-:lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"typescript", "javascript", "tsx"},     -- one of "all", "language", or a list of languages
-  highlight = {
-    enable = true,
-    disable = { "ruby" }
-  },
-}
-EOF
