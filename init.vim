@@ -2,6 +2,7 @@ let g:ale_disable_lsp = 1
 
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
+Plug 'airblade/vim-localorie'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
@@ -30,8 +31,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
@@ -49,9 +49,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-
-" Experimental
-Plug 'airblade/vim-localorie'
 call plug#end()
 
 " General Settings
