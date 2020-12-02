@@ -8,5 +8,7 @@
   "prettier.disableSuccessMessage": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
+  "coc.preferences.hoverTarget": "echo",
+  "suggest.detailField": "abbr",
   "suggest.floatEnable": false
 }

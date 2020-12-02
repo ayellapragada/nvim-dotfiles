@@ -51,6 +51,10 @@ Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 call plug#end()
 
+" something is bugged in CoC these are yolos
+autocmd VimEnter * let b:coc_suggest_disable = 1
+set completeopt-=preview
+
 " General Settings
 
 " Theme and Lightline
@@ -141,6 +145,7 @@ endif
 " Tmux stuff
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+
 
 " Leader and easier command
 let mapleader = " "
