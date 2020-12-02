@@ -7,6 +7,6 @@
   ],
   "prettier.disableSuccessMessage": true,
   "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "diagnostic.displayByAle": true
+  "solargraph.formatting": true
+  /* "diagnostic.displayByAle": true */
 }

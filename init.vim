@@ -4,7 +4,6 @@ call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'alvan/vim-closetag'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'AndrewRadev/tagalong.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'axelf4/vim-strip-trailing-whitespace'
@@ -31,7 +30,8 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/jsonc.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
@@ -49,6 +49,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
+
+" Experimental
+Plug 'airblade/vim-localorie'
 call plug#end()
 
 " General Settings
@@ -165,6 +168,7 @@ nnoremap <Leader>ts :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
+nnoremap <silent> <leader>lt :call localorie#translate()<CR>
 map <Leader>yc :YankCode<cr>
 
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
@@ -199,6 +203,7 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
 let test#strategy = "neovim"
+" let test#javascript#jest#options = '--watchAll=false'
 
 " fern.vim
 nmap - :Fern . -reveal=%<cr>
@@ -271,6 +276,7 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-json',
+      \ 'coc-markdownlint',
       \ 'coc-prettier',
       \ 'coc-solargraph',
       \ 'coc-sql',
@@ -282,12 +288,9 @@ let g:coc_global_extensions = [
 let g:splitjoin_ruby_hanging_args = 0
 
 " Closetag
-let g:closetag_filetypes = 'html,xhtml,javascript,jsx,typescript,tsx'
+let g:closetag_filetypes = 'html,xhtml,jsx,tsx'
 let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
-
-" Tagalong
-let g:tagalong_additional_filetypes = ['tsx']
 
 " Vista
 let g:vista_default_executive = 'coc'
@@ -300,3 +303,10 @@ let g:vista#renderer#enable_icon = 0
 
 " VimWiki remap
 nmap [][] <Plug>VimwikiRemoveHeaderLevel
+
+" Handle using en.yml files better
+autocmd CursorMoved *.yml echo localorie#expand_key()
+let g:localorie = {
+      \ 'quickfix':  1,
+      \ 'switch':    1
+      \ }
