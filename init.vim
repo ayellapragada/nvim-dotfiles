@@ -49,11 +49,17 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
+
+" Experimental
+Plug 'ChartaDev/charta.vim'
+Plug 'aonemd/kuroi.vim'
+Plug 'voldikss/vim-floaterm'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
-" something is bugged in CoC these are yolos
-autocmd VimEnter * let b:coc_suggest_disable = 1
-set completeopt-=preview
+" " something is bugged in CoC these are yolos
+" autocmd VimEnter * let b:coc_suggest_disable = 1
+" set completeopt-=preview
 
 " General Settings
 
@@ -63,6 +69,8 @@ if has('termguicolors')
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+set background=dark   "or use the light theme: set background=light
+" colorscheme kuroi
 colorscheme xcodedarkhc
 
 let g:lightline = {
@@ -158,8 +166,10 @@ set nofoldenable
 
 "Leader Mappings
 nnoremap <leader>ff :Rg<CR>
+nnoremap <leader>fa :ALEFix<CR>
+nnoremap <leader>fp :Prettier<CR>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
-nnoremap <Leader>fa :Format<CR>
+nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
@@ -170,12 +180,13 @@ nnoremap <Leader>ts :TREPLSendLine<cr>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
-nnoremap <silent> <leader>lt :call localorie#translate()<CR>
+nnoremap <leader>lt :call localorie#translate()<CR>
 map <Leader>yc :YankCode<cr>
 
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
+
 " fzf
 nnoremap <C-p> :Files<cr>
 nnoremap <C-b> :Buffers<cr>
@@ -186,6 +197,16 @@ if executable('rg')
 endif
 let g:fzf_preview_window = 'right:60%'
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
+
+" ale
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'ruby': ['rubocop'],
+\}
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
@@ -259,11 +280,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gn <Plug>(coc-rename)
 set shortmess+=c
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-command! -nargs=0 Format :call CocAction('format')
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -305,6 +325,9 @@ let g:vista#renderer#enable_icon = 0
 
 " VimWiki remap
 nmap [][] <Plug>VimwikiRemoveHeaderLevel
+
+" Charta
+let g:charta_api_token="SFMyNTY.g2gDdAAAAAFkAAd1c2VyX2lkYQxuBgCy1xo-dgFiAAFRgA.0x5qm5OoauYwK_irkGylvfwioQqvVtrHpIRM-pCO7nI"
 
 " Handle using en.yml files better
 autocmd CursorMoved *.yml echo localorie#expand_key()

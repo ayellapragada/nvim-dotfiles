@@ -8,6 +8,7 @@
   "prettier.disableSuccessMessage": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
+  "diagnostic.displayByAle": true,
   /* Things to make coc work while current bag is happenining */
   "suggest.floatEnable": false,
   "suggest.detailField": "abbr",
@@ -15,6 +16,5 @@
   "diagnostic.messageTarget": "echo",
   "signature.target": "echo",
   "diagnostic.virtualText": true,
-  "coc.preferences.floatActions": false,
-  "diagnostic.displayByAle": true
+  "coc.preferences.floatActions": false
 }
