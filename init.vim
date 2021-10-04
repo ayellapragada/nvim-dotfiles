@@ -11,6 +11,7 @@ Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
+Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
@@ -47,14 +48,10 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 " Experimental
 Plug 'ChartaDev/charta.vim'
-Plug 'aonemd/kuroi.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " " something is bugged in CoC these are yolos
@@ -70,7 +67,6 @@ endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 set background=dark   "or use the light theme: set background=light
-" colorscheme kuroi
 colorscheme xcodedarkhc
 
 let g:lightline = {
@@ -174,6 +170,7 @@ nnoremap <leader>n :nohl<CR>
 nmap <Leader>vr :tabnew $MYVIMRC<cr>
 nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>vv :Vista!!<cr>
+nnoremap <Leader>t= :TerraformFmt<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
 vnoremap <Leader>ts :TREPLSendSelection<cr>
 nnoremap <Leader>ts :TREPLSendLine<cr>
@@ -210,10 +207,6 @@ let g:ale_fixers = {
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
-
-" vim wiki
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 " neoterm
 command! -nargs=+ TT Topen | T <args>
@@ -297,6 +290,7 @@ let g:coc_global_extensions = [
       \ 'coc-actions',
       \ 'coc-eslint',
       \ 'coc-html',
+      \ 'coc-go',
       \ 'coc-json',
       \ 'coc-markdownlint',
       \ 'coc-prettier',
@@ -310,24 +304,24 @@ let g:coc_global_extensions = [
 let g:splitjoin_ruby_hanging_args = 0
 
 " Closetag
-let g:closetag_filetypes = 'html,xhtml,jsx,tsx'
-let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,jsx,tsx,erb'
+let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx,*.erb"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.erb'
 
 " Vista
 let g:vista_default_executive = 'coc'
 let g:vista_executive_for = {
-      \ 'vimwiki': 'markdown',
       \ 'markdown': 'toc',
       \ }
 let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 0
 
-" VimWiki remap
-nmap [][] <Plug>VimwikiRemoveHeaderLevel
-
 " Charta
 let g:charta_api_token="SFMyNTY.g2gDdAAAAAFkAAd1c2VyX2lkYQxuBgCy1xo-dgFiAAFRgA.0x5qm5OoauYwK_irkGylvfwioQqvVtrHpIRM-pCO7nI"
+
+" Terraform
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
 
 " Handle using en.yml files better
 autocmd CursorMoved *.yml echo localorie#expand_key()

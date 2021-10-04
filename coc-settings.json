@@ -5,16 +5,29 @@
     "typescript",
     "typescriptreact"
   ],
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  },
   "prettier.disableSuccessMessage": true,
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
-  "diagnostic.displayByAle": true,
-  /* Things to make coc work while current bag is happenining */
-  "suggest.floatEnable": false,
-  "suggest.detailField": "abbr",
-  "coc.preferences.hoverTarget": "echo",
-  "diagnostic.messageTarget": "echo",
-  "signature.target": "echo",
-  "diagnostic.virtualText": true,
-  "coc.preferences.floatActions": false
+  "diagnostic.displayByAle": true
+  /* The following code was used to previously handle a coc bug that crashed. */
+  /* It seems resolved, but leaving just in case. */
+  /* "suggest.floatEnable": false, */
+  /* "suggest.detailField": "abbr", */
+  /* "diagnostic.messageTarget": "echo", */
+  /* "signature.target": "echo", */
+  /* "diagnostic.virtualText": true, */
+  /* "coc.preferences.floatActions": false */
+  // No longer used apparently
+  /* "coc.preferences.hoverTarget": "echo", */
 }
