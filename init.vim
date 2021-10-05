@@ -1,44 +1,25 @@
-let g:ale_disable_lsp = 1
-
 call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'airblade/vim-localorie'
 Plug 'alvan/vim-closetag'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'arzg/vim-colors-xcode'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
-Plug 'junegunn/vim-peekaboo'
-Plug 'kana/vim-textobj-user'
-Plug 'kassio/neoterm'
-Plug 'kshenoy/vim-signature'
 Plug 'lambdalisue/fern.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
 Plug 'markonm/traces.vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
-Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'neoclide/jsonc.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -46,12 +27,26 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+" This is a test run for nvim 0.5
 Plug 'folke/trouble.nvim'
+Plug 'josa42/nvim-lightline-lsp'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RishabhRD/lspactions'
+Plug 'RishabhRD/nvim-lsputils'
+Plug 'RishabhRD/popfix'
+Plug 'tjdevries/astronauta.nvim'
+
+Plug 'bluz71/vim-moonfly-colors'
 
 " Experimental
 Plug 'ChartaDev/charta.vim'
@@ -65,14 +60,13 @@ if has('termguicolors')
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-set background=dark   "or use the light theme: set background=light
-colorscheme xcodedarkhc
+colorscheme moonfly
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'moonfly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ], [  'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ], [ 'lsp_status' ]]
       \ },
       \ 'tabline': { 'left': [['tabs']], 'right': [] },
       \ 'component_function': {
@@ -93,6 +87,7 @@ function! LightlineFilename()
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
+call lightline#lsp#register()
 
 set updatetime=300
 set re=0
@@ -159,14 +154,9 @@ set foldcolumn=0
 set nofoldenable
 
 "Leader Mappings
-nnoremap <leader>ff :Rg<CR>
-nnoremap <leader>fa :ALEFix<CR>
-nnoremap <leader>fp :Prettier<CR>
-nnoremap <Leader>fg :Rg <C-R><C-W><CR>
+nnoremap <leader>ff <cmd>Telescope live_grep<cr>
 nnoremap <Leader>fg :Rg <C-R><C-W><CR>
 nnoremap <leader>n :nohl<CR>
-nmap <Leader>vr :tabnew $MYVIMRC<cr>
-nmap <Leader>so :source $MYVIMRC<cr>
 nnoremap <Leader>vv :Vista!!<cr>
 nnoremap <Leader>t= :TerraformFmt<cr>
 nnoremap <Leader>tt :Ttoggle<cr>
@@ -184,43 +174,24 @@ nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
 nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
 nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+nnoremap <leader>rn :lua require'lspactions'.rename()<CR>
 
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
 
-" fzf
-nnoremap <C-p> :Files<cr>
+" Telescope
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+
 nnoremap <C-b> :Buffers<cr>
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
-let g:fzf_preview_window = 'right:60%'
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
-
-" ale
-let g:ale_linters = {
-\   'ruby': ['rubocop'],
-\}
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['rubocop'],
-\}
 
 " HighlightYank
 let g:highlightedyank_highlight_duration = 250
-
-" neoterm
-command! -nargs=+ TT Topen | T <args>
-let g:neoterm_autoscroll = '1'
-let g:neoterm_size = 16
-let g:neoterm_repl_ruby = 'pry'
-let g:neoterm_default_mod = 'botright'
-let g:neoterm_automap_keys = 'ztt'
-tnoremap <C-q> <C-\><C-n>:q<CR>
 
 " vim-test
 let test#strategy = "neovim"
@@ -267,9 +238,6 @@ augroup fern-custom
   autocmd FileType fern call s:init_fern()
 augroup END
 
-" Splitjoin
-let g:splitjoin_ruby_hanging_args = 0
-
 " Closetag
 let g:closetag_filetypes = 'html,xhtml,jsx,tsx,erb'
 let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx,*.erb"
@@ -280,7 +248,7 @@ let g:vista_default_executive = 'nvim_lsp'
 let g:vista_executive_for = {
       \ 'markdown': 'toc',
       \ }
-let g:vista_sidebar_width = 40
+let g:vista_sidebar_width = 80
 let g:vista#renderer#enable_icon = 0
 
 " Charta
@@ -309,14 +277,14 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'K' , '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -401,4 +369,25 @@ require'lspinstall'.post_install_hook = function ()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 require("trouble").setup {}
+
+-- Treesitter
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+require('telescope').setup {}
+require('telescope').load_extension('fzf')
+vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF
