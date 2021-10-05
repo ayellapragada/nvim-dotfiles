@@ -7,7 +7,6 @@ Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
-Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/gv.vim'
@@ -30,9 +29,16 @@ Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
 " This is a test run for nvim 0.5
+Plug 'bluz71/vim-moonfly-colors'
 Plug 'folke/trouble.nvim'
-Plug 'josa42/nvim-lightline-lsp'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'kabouzeid/nvim-lspinstall'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'marko-cerovac/material.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -44,14 +50,9 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RishabhRD/lspactions'
 Plug 'RishabhRD/nvim-lsputils'
 Plug 'RishabhRD/popfix'
-Plug 'tjdevries/astronauta.nvim'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-
-Plug 'bluz71/vim-moonfly-colors'
+Plug 'tjdevries/astronauta.nvim'
+Plug 'tomasiser/vim-code-dark'
 
 " Experimental
 Plug 'ChartaDev/charta.vim'
@@ -59,40 +60,14 @@ call plug#end()
 
 " General Settings
 
-" Theme and Lightline
+" Theme
 if has('termguicolors')
   set termguicolors
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme moonfly
-
-let g:lightline = {
-      \ 'colorscheme': 'moonfly',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ], [  'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ], [ 'lsp_status' ]]
-      \ },
-      \ 'tabline': { 'left': [['tabs']], 'right': [] },
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \ }
-      \ }
-function! LightlineModified()
-  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
-endfunction
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-call lightline#lsp#register()
+let g:material_style = 'deep ocean'
+colorscheme material
 
 set updatetime=300
 set re=0
@@ -450,5 +425,29 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'buffer' },
   },
+}
+
+-- lualine
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'material-nvim',
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'filename'},
+    lualine_c = {'branch'},
+    lualine_x = {},
+    lualine_y = {'encoding', 'fileformat', 'filetype', 'location'},
+    lualine_z = {},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  }
 }
 EOF
