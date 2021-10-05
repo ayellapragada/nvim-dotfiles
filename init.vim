@@ -32,7 +32,6 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
@@ -50,13 +49,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'wellle/targets.vim'
 
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'folke/trouble.nvim'
+
 " Experimental
 Plug 'ChartaDev/charta.vim'
 call plug#end()
-
-" " something is bugged in CoC these are yolos
-" autocmd VimEnter * let b:coc_suggest_disable = 1
-" set completeopt-=preview
 
 " General Settings
 
@@ -73,12 +72,11 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'cocstatus', 'filetype' ] ]
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
       \ },
       \ 'tabline': { 'left': [['tabs']], 'right': [] },
       \ 'component_function': {
       \   'filename': 'LightlineFilename',
-      \   'cocstatus': 'coc#status'
       \ }
       \ }
 function! LightlineModified()
@@ -180,6 +178,13 @@ nnoremap <Leader>tl :TestLast<cr>
 nnoremap <leader>lt :call localorie#translate()<CR>
 map <Leader>yc :YankCode<cr>
 
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
@@ -262,44 +267,6 @@ augroup fern-custom
   autocmd FileType fern call s:init_fern()
 augroup END
 
-" CoC.nvim
-" Remap keys for gotos
-nmap <silent> ga <Plug>(coc-codeaction-selected)w
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gh <Plug>(coc-fix-current)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gn <Plug>(coc-rename)
-set shortmess+=c
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-let g:coc_global_extensions = [
-      \ 'coc-actions',
-      \ 'coc-eslint',
-      \ 'coc-html',
-      \ 'coc-go',
-      \ 'coc-json',
-      \ 'coc-markdownlint',
-      \ 'coc-prettier',
-      \ 'coc-solargraph',
-      \ 'coc-sql',
-      \ 'coc-tailwindcss',
-      \ 'coc-tsserver'
-      \ ]
-
 " Splitjoin
 let g:splitjoin_ruby_hanging_args = 0
 
@@ -309,7 +276,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.jsx,*.tsx,*.erb"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.erb'
 
 " Vista
-let g:vista_default_executive = 'coc'
+let g:vista_default_executive = 'nvim_lsp'
 let g:vista_executive_for = {
       \ 'markdown': 'toc',
       \ }
@@ -329,3 +296,109 @@ let g:localorie = {
       \ 'quickfix':  1,
       \ 'switch':    1
       \ }
+
+lua << EOF
+-- keymaps
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+
+  -- Set some keybinds conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  elseif client.resolved_capabilities.document_range_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  end
+
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+    augroup lsp_document_highlight
+    autocmd! * <buffer>
+    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    augroup END
+    ]], false)
+  end
+end
+
+-- Configure lua language server for neovim development
+local lua_settings = {
+  Lua = {
+    runtime = {
+      -- LuaJIT in the case of Neovim
+      version = 'LuaJIT',
+      path = vim.split(package.path, ';'),
+    },
+    diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      globals = {'vim'},
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      },
+    },
+  }
+}
+
+-- config that activates keymaps and enables snippet support
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
+end
+
+-- lsp-install
+local function setup_servers()
+  require'lspinstall'.setup()
+
+  -- get all installed servers
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    local config = make_config()
+
+    -- language specific config
+    if server == "lua" then
+      config.settings = lua_settings
+    end
+    require'lspconfig'[server].setup(config)
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+require("trouble").setup {}
+EOF
