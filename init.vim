@@ -135,7 +135,7 @@ set nofoldenable
 
 "Leader Mappings
 nnoremap <leader>ff <cmd>Telescope live_grep<cr>
-nnoremap <Leader>fg :Rg <C-R><C-W><CR>
+nnoremap <leader>fg <cmd>Telescope grep_string<cr>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>vv :Vista!!<cr>
 nnoremap <Leader>t= :TerraformFmt<cr>
@@ -163,7 +163,6 @@ nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 " Telescope
 nnoremap <C-p> <cmd>Telescope find_files<cr>
 
-nnoremap <C-b> :Buffers<cr>
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
