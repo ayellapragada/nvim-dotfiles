@@ -29,7 +29,6 @@ Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
 " This is a test run for nvim 0.5
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'folke/trouble.nvim'
 Plug 'hoob3rt/lualine.nvim'
 Plug 'hrsh7th/cmp-buffer'
@@ -52,7 +51,6 @@ Plug 'RishabhRD/nvim-lsputils'
 Plug 'RishabhRD/popfix'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'tjdevries/astronauta.nvim'
-Plug 'tomasiser/vim-code-dark'
 
 " Experimental
 Plug 'ChartaDev/charta.vim'
