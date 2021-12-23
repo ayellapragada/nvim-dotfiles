@@ -14,7 +14,6 @@ Plug 'lambdalisue/fern.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
-Plug 'markonm/traces.vim'
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/jsonc.vim'
 Plug 'rhysd/git-messenger.vim'
@@ -34,7 +33,7 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'marko-cerovac/material.nvim'
@@ -130,6 +129,9 @@ nnoremap , :
 set foldmethod=indent
 set foldcolumn=0
 set nofoldenable
+
+" Better substitute and replace
+set inccommand=split
 
 "Leader Mappings
 nnoremap <leader>ff <cmd>Telescope live_grep<cr>
@@ -321,31 +323,23 @@ local function make_config()
   }
 end
 
--- lsp-install
-local function setup_servers()
-  require'lspinstall'.setup()
+-- nvim-lsp-installer
+local lsp_installer = require("nvim-lsp-installer")
 
-  -- get all installed servers
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    local config = make_config()
+-- Register a handler that will be called for all installed servers.
+-- Alternatively, you may also register handlers on specific server instances instead (see example below).
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
 
-    -- language specific config
-    if server == "lua" then
-      config.settings = lua_settings
-    end
-    require'lspconfig'[server].setup(config)
-  end
-end
+    -- (optional) Customize the options passed to the server
+    -- if server.name == "tsserver" then
+    --     opts.root_dir = function() ... end
+    -- end
 
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-require("trouble").setup {}
+    -- This setup() function is exactly the same as lspconfig's setup function.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    server:setup(opts)
+end)
 
 -- Treesitter
 
