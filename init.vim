@@ -2,12 +2,12 @@ call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'hashivim/vim-terraform'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'nathom/filetype.nvim'
-Plug 'navarasu/onedark.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -16,6 +16,8 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+
+Plug 'olimorris/onedarkpro.nvim'
 " Neovim Updates / Replacements
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
@@ -25,7 +27,7 @@ Plug 'folke/trouble.nvim'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'hashivim/vim-terraform'
+
 " CMP
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -44,10 +46,7 @@ if has('termguicolors')
   set termguicolors
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:onedark_config = {
-    \ 'style': 'darker',
-\}
-colorscheme onedark
+colorscheme onedarkpro
 
 set updatetime=250
 set re=0
@@ -139,6 +138,7 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 nmap <C-p> <cmd>Telescope find_files<cr>
+" nmap <C-n> <cmd>NvimTreeToggle<cr>
 
 let g:highlightedyank_highlight_duration = 250
 
@@ -170,9 +170,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("Comment").setup()
-
 require("nvim-ts-autotag").setup()
-
 require("trouble").setup()
 
 require("mason").setup()
@@ -187,6 +185,7 @@ require("mason-lspconfig").setup_handlers {
       }
     end
 }
+
 local cmp = require'cmp'
 cmp.setup({
     snippet = {
