@@ -26,6 +26,14 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hashivim/vim-terraform'
+" CMP
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 call plug#end()
 
 " General Settings
@@ -93,6 +101,11 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" autocomplete
+set completeopt=menu,menuone,noselect
+
+
+
 " Tmux stuff
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -115,12 +128,10 @@ nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
 nnoremap <Leader>tl :TestLast<cr>
-map <Leader>yc :YankCode<cr>
-
+nnoremap <Leader>yc :YankCode<cr>
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
-
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
@@ -167,9 +178,34 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "solargraph", "terraformls", "tflint" }
 })
+capabilities = require('cmp_nvim_lsp').default_capabilities()
 require("mason-lspconfig").setup_handlers {
   function (server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup {}
+    require("lspconfig")[server_name].setup {
+      capabilities = capabilities
+      }
     end
 }
+local cmp = require'cmp'
+cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 EOF
