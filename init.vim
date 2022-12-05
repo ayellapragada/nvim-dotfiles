@@ -8,9 +8,8 @@ Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
-Plug 'neoclide/jsonc.vim'
+Plug 'numToStr/Comment.nvim'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
@@ -18,11 +17,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-Plug 'marko-cerovac/material.nvim'
-Plug 'hoob3rt/lualine.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 " General Settings
@@ -33,10 +27,7 @@ if has('termguicolors')
 endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-let g:material_style = 'deep ocean'
-colorscheme material
-
-set updatetime=300
+set updatetime=250
 set re=0
 
 " Better display for messages
@@ -81,6 +72,9 @@ set splitbelow
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 
+" Enable mouse mode
+set mouse=a
+
 " Remap Esc for terminal mode
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -103,8 +97,6 @@ set nofoldenable
 set inccommand=split
 
 "Leader Mappings
-nnoremap <leader>ff <cmd>Telescope live_grep<cr>
-nnoremap <leader>fg <cmd>Telescope grep_string<cr>
 nnoremap <leader>n :nohl<CR>
 nnoremap <Leader>tn :TestNearest<cr>
 nnoremap <Leader>tf :TestFile<cr>
@@ -114,9 +106,6 @@ map <Leader>yc :YankCode<cr>
 nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
 
 " Plugin Settings
-
-" Telescope
-nnoremap <C-p> <cmd>Telescope find_files<cr>
 
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -139,53 +128,5 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx,*.erb'
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
-lua << EOF
--- Configure lua language server for neovim development
-local lua_settings = {
-  Lua = {
-    runtime = {
-      -- LuaJIT in the case of Neovim
-      version = 'LuaJIT',
-      path = vim.split(package.path, ';'),
-    },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = {'vim'},
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      },
-    },
-  }
-}
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- lualine
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'material-nvim',
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'filename'},
-    lualine_c = {'branch'},
-    lualine_x = {},
-    lualine_y = {'encoding', 'fileformat', 'filetype', 'location'},
-    lualine_z = {},
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  }
-}
-EOF
+" Comments
+lua require('Comment').setup()
