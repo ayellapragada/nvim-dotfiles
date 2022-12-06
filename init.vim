@@ -2,15 +2,29 @@ call plug#begin()
 Plug 'AaronLasseigne/yank-code'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'elihunter173/dirbuf.nvim'
+Plug 'folke/trouble.nvim'
 Plug 'hashivim/vim-terraform'
+Plug 'honza/vim-snippets'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'janko-m/vim-test'
 Plug 'jiangmiao/auto-pairs'
+Plug 'L3MON4D3/LuaSnip'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'nathom/filetype.nvim'
+Plug 'neovim/nvim-lspconfig'
 Plug 'numToStr/Comment.nvim'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'olimorris/onedarkpro.nvim'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
@@ -18,27 +32,9 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-
-" Neovim Updates / Replacements
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'windwp/nvim-ts-autotag'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-Plug 'folke/trouble.nvim'
-Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'elihunter173/dirbuf.nvim'
-
-" CMP
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'honza/vim-snippets'
+Plug 'williamboman/mason.nvim'
+Plug 'windwp/nvim-ts-autotag'
 call plug#end()
 
 " General Settings
