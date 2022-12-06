@@ -18,6 +18,7 @@ Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
 Plug 'olimorris/onedarkpro.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 " Neovim Updates / Replacements
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
@@ -48,11 +49,11 @@ endif
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme onedarkpro
 
-set updatetime=250
+set updatetime=750
 set re=0
 
 " Better display for messages
-set cmdheight=2
+set cmdheight=0
 set signcolumn=yes
 
 " Have relative line numbers, with actual line number of current line.
@@ -172,6 +173,41 @@ require("nvim-treesitter.configs").setup({
 require("Comment").setup()
 require("nvim-ts-autotag").setup()
 require("trouble").setup()
+
+require('lualine').setup {
+  options = {
+    icons_enabled = false,
+    theme = 'auto',
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 
 require("mason").setup()
 require("mason-lspconfig").setup({
