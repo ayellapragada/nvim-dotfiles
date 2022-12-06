@@ -139,7 +139,6 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 nmap <C-p> <cmd>Telescope find_files<cr>
-" nmap <C-n> <cmd>NvimTreeToggle<cr>
 
 let g:highlightedyank_highlight_duration = 250
 
@@ -169,10 +168,11 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = true },
   rainbow = { enable = true, extended_mode = true },
 })
+require("nvim-ts-autotag").setup()
 
 require("Comment").setup()
-require("nvim-ts-autotag").setup()
 require("trouble").setup()
+require("telescope").setup({})
 
 require('lualine').setup {
   options = {
