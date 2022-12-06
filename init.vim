@@ -9,6 +9,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'nathom/filetype.nvim'
 Plug 'numToStr/Comment.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'olimorris/onedarkpro.nvim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
@@ -17,8 +19,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
-Plug 'olimorris/onedarkpro.nvim'
-Plug 'nvim-lualine/lualine.nvim'
 " Neovim Updates / Replacements
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
@@ -28,6 +28,7 @@ Plug 'folke/trouble.nvim'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'elihunter173/dirbuf.nvim'
 
 " CMP
 Plug 'hrsh7th/cmp-nvim-lsp'
