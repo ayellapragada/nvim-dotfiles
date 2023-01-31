@@ -40,11 +40,9 @@ call plug#end()
 " General Settings
 
 " Theme
-if has('termguicolors')
-  set termguicolors
-endif
+set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme onedarkpro
+colorscheme onedark
 
 set updatetime=750
 set re=0
@@ -123,11 +121,10 @@ set inccommand=split
 "Leader Mappings
 nnoremap <leader>ff <cmd>Telescope live_grep<cr>
 nnoremap <leader>n :nohl<CR>
-nnoremap <Leader>tn :TestNearest<cr>
-nnoremap <Leader>tf :TestFile<cr>
-nnoremap <Leader>tl :TestLast<cr>
-nnoremap <Leader>yc :YankCode<cr>
-nnoremap <silent><leader>1 :source $MYVIMRC \| :PlugInstall<CR>
+nnoremap <Leader>tn :TestNearest GUARD=true<cr>
+nnoremap <Leader>tf :TestFile GUARD=true<cr>
+nnoremap <Leader>tl :TestLast GUARD=true<cr>
+nnoremap <leader>yc <plug>YankCode
 
 " Plugin Settings
 if executable('rg')
@@ -140,6 +137,7 @@ nmap <C-p> <cmd>Telescope find_files<cr>
 let g:highlightedyank_highlight_duration = 250
 
 let test#strategy = "neovim"
+let test#ruby#rspec = '--verbose'
 
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
